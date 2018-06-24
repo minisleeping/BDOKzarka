@@ -4,6 +4,8 @@ from discord import Game
 from discord.ext.commands import Bot
 import datetime
 import os
+import pytz
+tz = pytz.timezone('Asia/Bangkok')
 
 ktdate = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
 kttime = [[14],[18],[0,14],[10,18],[14],[18],[0,10,18]]
@@ -24,7 +26,7 @@ async def on_ready():
 async def my_background_task():
 	await client.wait_until_ready()
 	while not client.is_closed:
-		now = datetime.datetime.now()
+		now = datetime.datetime.now(tz)
 		date = now.strftime("%A")
 		hour = (now.hour)
 		mine = (now.minute)
@@ -49,7 +51,7 @@ async def my_background_task():
 
 		startlp = 0
 		while  startlp == 0:
-			now = datetime.datetime.now()
+			now = datetime.datetime.now(tz)
 			date = now.strftime("%A")
 			hour = (now.hour)
 			mine = (now.minute)
@@ -81,4 +83,4 @@ async def my_background_task():
 					startlp = 1
 
 client.loop.create_task(my_background_task())
-client.run(os.getenv('TOKEN'))
+client.run(os.getenv('KZTOKEN'))
