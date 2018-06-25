@@ -1,1 +1,1 @@
-worker: python bdokzarka.py
+worker: python bdokzarka.py & python bdokutum.py 
